@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License Plate Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        /* Optimizing for mobile tapping performance */
+        .state-card {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans min-h-screen flex flex-col">
+
+    <header class="sticky top-0 bg-slate-800/95 backdrop-blur-md shadow-lg border-b border-slate-700 p-4 z-50">
+        <div class="max-w-md mx-auto">
+            <div class="flex justify-between items-center mb-2">
+                <h1 class="text-xl font-bold tracking-tight text-emerald-400">🚗 PlateSpotter MVP</h1>
+                <span id="progress-text" class="text-sm font-semibold bg-slate-700 px-3 py-1 rounded-full text-slate-300">
+                    0 / 50 (0%)
+                </span>
+            </div>
+            <div class="w-full bg-slate-700 h-3 rounded-full overflow-hidden">
+                <div id="progress-bar" class="bg-emerald-500 h-full w-0 transition-all duration-300 ease-out"></div>
+            </div>
+            <div class="flex justify-end mt-2">
+                <button id="reset-btn" class="text-xs text-slate-400 hover:text-red-400 transition-colors">
+                    Reset All Data
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-md w-full mx-auto p-4 pb-12">
+        <div id="state-grid" class="grid grid-cols-3 gap-3">
+            </div>
+    </main>
+
+    <script>
+        // Array of 50 US States (Abbreviation and Full Name)
+        const US_STATES = [
+            { id: "AL", name: "Alabama" }, { id: "AK", name: "Alaska" }, { id: "AZ", name: "Arizona" },
+            { id: "AR", name: "Arkansas" }, { id: "CA", name: "California" }, { id: "CO", name: "Colorado" },
+            { id: "CT", name: "Connecticut" }, { id: "DE", name: "Delaware" }, { id: "FL", name: "Florida" },
+            { id: "GA", name: "Georgia" }, { id: "HI", name: "Hawaii" }, { id: "ID", name: "Idaho" },
+            { id: "IL", name: "Illinois" }, { id: "IN", name: "Indiana" }, { id: "IA", name: "Iowa" },
+            { id: "KS", name: "Kansas" }, { id: "KY", name: "Kentucky" }, { id: "LA", name: "Louisiana" },
+            { id: "ME", name: "Maine" }, { id: "MD", name: "Maryland" }, { id: "MA", name: "Massachusetts" },
+            { id: "MI", name: "Michigan" }, { id: "MN", name: "Minnesota" }, { id: "MS", name: "Mississippi" },
+            { id: "MO", name: "Missouri" }, { id: "MT", name: "Montana" }, { id: "NE", name: "Nebraska" },
+            { id: "NV", name: "Nevada" }, { id: "NH", name: "New Hampshire" }, { id: "NJ", name: "New Jersey" },
+            { id: "NM", name: "New Mexico" }, { id: "NY", name: "New York" }, { id: "NC", name: "North Carolina" },
+            { id: "ND", name: "North Dakota" }, { id: "OH", name: "Ohio" }, { id: "OK", name: "Oklahoma" },
+            { id: "OR", name: "Oregon" }, { id: "PA", name: "Pennsylvania" }, { id: "RI", name: "Rhode Island" },
+            { id: "SC", name: "South Carolina" }, { id: "SD", name: "South Dakota" }, { id: "TN", name: "Tennessee" },
+            { id: "TX", name: "Texas" }, { id: "UT", name: "Utah" }, { id: "VT", name: "Vermont" },
+            { id: "VA", name: "Virginia" }, { id: "WA", name: "Washington" }, { id: "WV", name: "West Virginia" },
+            { id: "WI", "name": "Wisconsin" }, { id: "WY", name: "Wyoming" }
+        ];
+
+        // Core App State
+        let spottedStates = [];
+
+        // DOM Elements
+        const stateGrid = document.getElementById('state-grid');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Initialize App
+        function init() {
+            loadFromLocalStorage();
+            renderGrid();
+            updateProgress();
+            
+            // Set up reset button event listener
+            resetBtn.addEventListener('click', handleReset);
+        }
+
+        // Load data from LocalStorage
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('spottedStates');
+            if (savedData) {
+                try {
+                    spottedStates = JSON.parse(savedData);
+                } catch (e) {
+                    console.error("Error parsing localStorage data", e);
+                    spottedStates = [];
+                }
+            }
+        }
+
+        // Save data to LocalStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('spottedStates', JSON.stringify(spottedStates));
+        }
+
+        // Calculate and update top progress elements
+        function updateProgress() {
+            const count = spottedStates.length;
+            const total = US_STATES.length;
+            const percentage = Math.round((count / total) * 100);
+
+            progressText.textContent = `${count} / ${total} (${percentage}%)`;
+            progressBar.style.width = `${percentage}%`;
+        }
+
+        // Build the physical grid of cards
+        function renderGrid() {
+            stateGrid.innerHTML = ''; // Clear container
+
+            US_STATES.forEach(state => {
+                const isSpotted = spottedStates.includes(state.id);
+                
+                // Create card container button
+                const card = document.createElement('button');
+                card.id = `card-${state.id}`;
+                card.className = `state-card flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 select-none border min-h-[90px] ${
+                    isSpotted 
+                        ? 'bg-emerald-600 border-emerald-400 text-white shadow-md shadow-emerald-900/30 font-bold scale-98' 
+                        : 'bg-slate-800 border-slate-700 text-slate-300 active:bg-slate-700'
+                }`;
+
+                // Append State Abbreviation
+                const abbr = document.createElement('span');
+                abbr.className = 'text-2xl tracking-wide';
+                abbr.textContent = state.id;
+                card.appendChild(abbr);
+
+                // Append Full State Name (Subtext)
+                const name = document.createElement('span');
+                name.className = `text-[10px] uppercase tracking-wider mt-1 opacity-70 truncate max-w-full ${
+                    isSpotted ? 'text-emerald-100' : 'text-slate-400'
+                }`;
+                name.textContent = state.name;
+                card.appendChild(name);
+
+                // Click handler toggling the state
+                card.addEventListener('click', () => toggleState(state.id));
+
+                stateGrid.appendChild(card);
+            });
+        }
+
+        // Toggle state selection
+        function toggleState(stateId) {
+            const index = spottedStates.indexOf(stateId);
+            
+            if (index > -1) {
+                // Already spotted, remove it
+                spottedStates.splice(index, 1);
+            } else {
+                // Not spotted yet, add it
+                spottedStates.push(stateId);
+            }
+
+            saveToLocalStorage();
+            updateProgress();
+            
+            // Visual Update to targeted card instead of a heavy full re-render
+            const card = document.getElementById(`card-${stateId}`);
+            const nameLabel = card.querySelector('span:last-child');
+            const isSpotted = spottedStates.includes(stateId);
+
+            if (isSpotted) {
+                card.className = 'state-card flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 select-none border min-h-[90px] bg-emerald-600 border-emerald-400 text-white shadow-md shadow-emerald-900/30 font-bold scale-98';
+                nameLabel.className = 'text-[10px] uppercase tracking-wider mt-1 opacity-70 truncate max-w-full text-emerald-100';
+            } else {
+                card.className = 'state-card flex flex-col items-center justify-center p-4 rounded-xl transition-all duration-200 select-none border min-h-[90px] bg-slate-800 border-slate-700 text-slate-300 active:bg-slate-700';
+                nameLabel.className = 'text-[10px] uppercase tracking-wider mt-1 opacity-70 truncate max-w-full text-slate-400';
+            }
+        }
+
+        // Clear everything out
+        function handleReset() {
+            if (confirm("Are you sure you want to reset your trip progress?")) {
+                spottedStates = [];
+                saveToLocalStorage();
+                updateProgress();
+                renderGrid();
+            }
+        }
+
+        // Start the engine
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
