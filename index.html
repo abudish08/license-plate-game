@@ -114,3 +114,287 @@
             { id: "AZ", name: "Arizona", path: "M328.6,351.3l13.1,113l-74,10.7l-4.8-11.1l-18.8-13l84.3-99.6V351.3z" },
             { id: "NM", name: "New Mexico", path: "M434,360.7l13.1,110.1l-118.5,1.3l-13.1-113l118.5-9.4V360.7z" },
             { id: "CO", name: "Colorado", path: "M451.9,268.2l-11.5,89.6l-111.8,9.4l-11.5-89.6L451.9,268.2z" },
+            { id: "ND", name: "North Dakota", path: "M498.9,107.1l-3.2,50.8l-120.5,6.5l7-81.8L498.9,107.1z" },
+            { id: "SD", name: "South Dakota", path: "M495.7,157.9l-3.2,54.7l-120.5,6.5l3.2-50.8L495.7,157.9z" },
+            { id: "NE", name: "Nebraska", path: "M513.6,212.6l-5.1,53.4l-30.7,1l-105.7,5.5l-3.2-54.7L513.6,212.6z" },
+            { id: "KS", name: "Kansas", path: "M519.3,266l-6.4,59.3l-131.6,2l11.5-89.6l30.7-1L519.3,266z" },
+            { id: "OK", name: "Oklahoma", path: "M524.4,325.3l-3.2,35.2l-87.2,1.3v-9.4l-31.6,2l6.4-59.3L524.4,325.3z" },
+            { id: "TX", name: "Texas", path: "M521.2,360.5l1.9,46.9l-38,44.9L464,484.5l-16.9-13.7l-13.1,110.1l-18.2-1l-13.1-110.1l118.5-1.3l3.2-35.2l87.2-1.3V360.5z" },
+            { id: "MN", name: "Minnesota", path: "M566,113.6l-1.3,95.1l-68.7-1.6l3.2-54.7l3.2-50.8L566,113.6z" },
+            { id: "IA", name: "Iowa", path: "M576.2,208.7l-1,53.1l-61.6,4.2l5.1-53.4L576.2,208.7z" },
+            { id: "MO", name: "Missouri", path: "M589.6,261.8l-7.7,64.8l-57.5,1.3l6.4-59.3l61.6-4.2l-2.8-2.6V261.8z" },
+            { id: "AR", name: "Arkansas", path: "M581.9,326.6l-3.8,47.9l-53.7,1.3l-3.2-35.2l57.5-1.3V326.6z" },
+            { id: "LA", name: "Louisiana", path: "M578.1,374.5l5.1,43.3l14.4,2.9l-1,14.3H561.2l-38-44.9l1.9-46.9l53.7-1.3V374.5z" },
+            { id: "WI", name: "Wisconsin", path: "M635.3,153.1l-17.6,56l-51.4-1.6l1.3-95.1L588,103l21.1-11.1L635.3,153.1z" },
+            { id: "IL", name: "Illinois", path: "M625.1,209.1l-14.7,78.8l-20.8-26.1v-2h-2.8l1,53.1L625.1,209.1z" },
+            { id: "IN", name: "Indiana", path: "M654.5,214.3l-10.9,74.9l-18.5-20.1l14.7-78.8L654.5,214.3z" },
+            { id: "MS", name: "Mississippi", path: "M603,332.9l2.6,65.8l-22.4,19.2l-5.1-43.3l3.8-47.9l21.1,6.2V332.9z" },
+            { id: "PA", path: "M794,180.1l38.6,6.2l-11.2,46.6l-38.6,6.2L782.8,193L794,180.1z", name: "Pennsylvania" },
+            { id: "ME", path: "M911.8,111l20.1,28l-21.7,28.3l-17.2-18.6l1.3-46.9L911.8,111z", name: "Maine" },
+            { id: "VT", path: "M893.3,138.8l7.7,40.4l-7.7,1.3l-7.7-40.4L893.3,138.8z", name: "Vermont" },
+            { id: "NH", path: "M901,138.8l10.8,40.4l-10.8,1.3l-7.7-40.4L901,138.8z", name: "New Hampshire" },
+            { id: "MA", path: "M894.6,180.1l23.3-2.6l1.3,4.6l-23.3,2.6V180.1z", name: "Massachusetts" }
+        ];
+
+        const US_STATES = [
+            { id: "AL", name: "Alabama" }, { id: "AK", name: "Alaska" }, { id: "AZ", name: "Arizona" },
+            { id: "AR", name: "Arkansas" }, { id: "CA", name: "California" }, { id: "CO", name: "Colorado" },
+            { id: "CT", name: "Connecticut" }, { id: "DE", name: "Delaware" }, { id: "FL", name: "Florida" },
+            { id: "GA", name: "Georgia" }, { id: "HI", name: "Hawaii" }, { id: "ID", name: "Idaho" },
+            { id: "IL", name: "Illinois" }, { id: "IN", name: "Indiana" }, { id: "IA", name: "Iowa" },
+            { id: "KS", name: "Kansas" }, { id: "KY", name: "Kentucky" }, { id: "LA", name: "Louisiana" },
+            { id: "ME", name: "Maine" }, { id: "MD", name: "Maryland" }, { id: "MA", name: "Massachusetts" },
+            { id: "MI", name: "Michigan" }, { id: "MN", name: "Minnesota" }, { id: "MS", name: "Mississippi" },
+            { id: "MO", name: "Missouri" }, { id: "MT", name: "Montana" }, { id: "NE", name: "Nebraska" },
+            { id: "NV", name: "Nevada" }, { id: "NH", name: "New Hampshire" }, { id: "NJ", name: "New Jersey" },
+            { id: "NM", name: "New Mexico" }, { id: "NY", name: "New York" }, { id: "NC", name: "North Carolina" },
+            { id: "ND", name: "North Dakota" }, { id: "OH", name: "Ohio" }, { id: "OK", name: "Oklahoma" },
+            { id: "OR", name: "Oregon" }, { id: "PA", name: "Pennsylvania" }, { id: "RI", name: "Rhode Island" },
+            { id: "SC", name: "South Carolina" }, { id: "SD", name: "South Dakota" }, { id: "TN", name: "Tennessee" },
+            { id: "TX", name: "Texas" }, { id: "UT", name: "Utah" }, { id: "VT", name: "Vermont" },
+            { id: "VA", name: "Virginia" }, { id: "WA", name: "Washington" }, { id: "WV", name: "West Virginia" },
+            { id: "WI", name: "Wisconsin" }, { id: "WY", name: "Wyoming" }
+        ];
+
+        const PLAYER_COLORS = {
+            blue: "bg-blue-600",
+            purple: "bg-purple-600",
+            amber: "bg-amber-600",
+            rose: "bg-rose-600",
+            indigo: "bg-indigo-600",
+            cyan: "bg-cyan-600"
+        };
+        const COLOR_KEYS = Object.keys(PLAYER_COLORS);
+
+        let players = []; 
+        let activePlayerId = null;
+
+        // DOM Handles
+        const playerTray = document.getElementById('player-tray');
+        const addPlayerBtn = document.getElementById('add-player-btn');
+        const activePlayerTitle = document.getElementById('active-player-title');
+        const stateGrid = document.getElementById('state-grid');
+        const usSvg = document.getElementById('us-svg');
+        const progressText = document.getElementById('progress-text');
+        const progressBar = document.getElementById('progress-bar');
+        const resetBtn = document.getElementById('reset-btn');
+        const tabGrid = document.getElementById('tab-grid');
+        const tabMap = document.getElementById('tab-map');
+        const viewGrid = document.getElementById('view-grid');
+        const viewMap = document.getElementById('view-map');
+
+        function init() {
+            loadGlobalData();
+            
+            // Build fresh clean defaults if corrupted/empty
+            if(!Array.isArray(players) || players.length === 0 || !players[0].colorKey) {
+                players = [];
+                createNewPlayer("Player 1");
+                createNewPlayer("Player 2");
+            }
+            if(!activePlayerId) {
+                activePlayerId = players[0].id;
+            }
+
+            renderPlayerTray();
+            renderGrid();
+            renderMap();
+            updateProgress();
+
+            addPlayerBtn.addEventListener('click', handleAddPlayerPrompt);
+            tabGrid.addEventListener('click', () => switchView('grid'));
+            tabMap.addEventListener('click', () => switchView('map'));
+            resetBtn.addEventListener('click', handleActiveReset);
+        }
+
+        function loadGlobalData() {
+            const savedPlayers = localStorage.getItem('ps_players');
+            const savedActive = localStorage.getItem('ps_active_id');
+            if(savedPlayers) {
+                try { 
+                    players = JSON.parse(savedPlayers); 
+                } catch(e) { 
+                    players = []; 
+                }
+            }
+            if(savedActive) activePlayerId = savedActive;
+        }
+
+        function saveGlobalData() {
+            localStorage.setItem('ps_players', JSON.stringify(players));
+            localStorage.setItem('ps_active_id', activePlayerId);
+        }
+
+        function createNewPlayer(name) {
+            const id = 'p_' + Date.now() + Math.random().toString(36).substr(2, 4);
+            const colorKey = COLOR_KEYS[players.length % COLOR_KEYS.length];
+            const newPlayer = {
+                id: id,
+                name: name,
+                colorKey: colorKey,
+                spotted: []
+            };
+            players.push(newPlayer);
+            saveGlobalData();
+            return id;
+        }
+
+        function getActivePlayer() {
+            return players.find(p => p.id === activePlayerId) || players[0];
+        }
+
+        function switchView(view) {
+            if (view === 'grid') {
+                viewMap.classList.replace('block', 'hidden');
+                viewGrid.classList.replace('hidden', 'block');
+                tabGrid.className = "flex-1 py-2 text-center text-sm font-medium rounded-md bg-slate-800 text-emerald-400 shadow transition-all cursor-pointer";
+                tabMap.className = "flex-1 py-2 text-center text-sm font-medium rounded-md text-slate-400 hover:text-slate-200 transition-all cursor-pointer";
+            } else {
+                viewGrid.classList.replace('block', 'hidden');
+                viewMap.classList.replace('hidden', 'block');
+                tabMap.className = "flex-1 py-2 text-center text-sm font-medium rounded-md bg-slate-800 text-emerald-400 shadow transition-all cursor-pointer";
+                tabGrid.className = "flex-1 py-2 text-center text-sm font-medium rounded-md text-slate-400 hover:text-slate-200 transition-all cursor-pointer";
+            }
+        }
+
+        function renderPlayerTray() {
+            playerTray.innerHTML = '';
+            players.forEach(player => {
+                const isActive = player.id === activePlayerId;
+                const bgClass = PLAYER_COLORS[player.colorKey] || "bg-blue-600";
+                
+                const chip = document.createElement('button');
+                chip.className = `player-chip shrink-0 flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border cursor-pointer ${
+                    isActive 
+                    ? `${bgClass} text-white border-transparent font-bold` 
+                    : 'bg-slate-800 text-slate-400 border-slate-700 active:bg-slate-700'
+                }`;
+                
+                const dotColor = isActive ? 'bg-white' : bgClass;
+
+                chip.innerHTML = `
+                    <span class="w-2 h-2 rounded-full ${dotColor}"></span>
+                    <span>${player.name}</span>
+                    <span class="ml-1 px-1.5 py-0.2 text-xs rounded-md ${isActive ? 'bg-black/20 text-white' : 'bg-slate-900 text-slate-400'}">${player.spotted.length}</span>
+                `;
+
+                chip.addEventListener('click', () => {
+                    activePlayerId = player.id;
+                    saveGlobalData();
+                    renderPlayerTray();
+                    syncAllUIVisuals();
+                });
+
+                playerTray.appendChild(chip);
+            });
+        }
+
+        function syncAllUIVisuals() {
+            const activePlayer = getActivePlayer();
+            activePlayerTitle.textContent = `🎯 ${activePlayer.name}'s Hunt`;
+            
+            updateProgress();
+
+            US_STATES.forEach(state => {
+                const card = document.getElementById(`card-${state.id}`);
+                if (card) {
+                    const isSpotted = activePlayer.spotted.includes(state.id);
+                    const nameLabel = card.querySelector('span:last-child');
+                    card.className = `state-card flex flex-col items-center justify-center p-4 rounded-xl border min-h-[90px] cursor-pointer ${
+                        isSpotted ? 'bg-emerald-600 border-emerald-400 text-white font-bold' : 'bg-slate-800 border-slate-700 text-slate-300 active:bg-slate-700'
+                    }`;
+                    nameLabel.textContent = state.name;
+                    nameLabel.className = `text-[10px] uppercase tracking-wider mt-1 opacity-70 truncate max-w-full ${isSpotted ? 'text-emerald-100' : 'text-slate-400'}`;
+                }
+            });
+
+            MAP_DATA.forEach(state => {
+                const mapPath = document.getElementById(`map-${state.id}`);
+                if (mapPath) {
+                    const isSpotted = activePlayer.spotted.includes(state.id);
+                    mapPath.setAttribute("class", `map-state cursor-pointer stroke-slate-900 stroke-[1.5] ${
+                        isSpotted ? 'fill-emerald-500' : 'fill-slate-700'
+                    }`);
+                }
+            });
+        }
+
+        function updateProgress() {
+            const activePlayer = getActivePlayer();
+            const count = activePlayer.spotted.length;
+            const total = US_STATES.length;
+            const percentage = Math.round((count / total) * 100);
+            progressText.textContent = `${count} / ${total} (${percentage}%)`;
+            progressBar.style.width = `${percentage}%`;
+        }
+
+        function renderGrid() {
+            stateGrid.innerHTML = '';
+            US_STATES.forEach(state => {
+                const card = document.createElement('button');
+                card.id = `card-${state.id}`;
+                card.innerHTML = `<span class="text-2xl tracking-wide">${state.id}</span>
+                                  <span class="text-[10px] uppercase tracking-wider mt-1 opacity-70 truncate max-w-full"></span>`;
+                card.addEventListener('click', () => toggleState(state.id));
+                stateGrid.appendChild(card);
+            });
+            syncAllUIVisuals();
+        }
+
+        function renderMap() {
+            usSvg.innerHTML = '';
+            MAP_DATA.forEach(state => {
+                const pathElement = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                pathElement.setAttribute("d", state.path);
+                pathElement.setAttribute("id", `map-${state.id}`);
+                
+                const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+                title.textContent = state.name;
+                pathElement.appendChild(title);
+
+                pathElement.addEventListener('click', () => toggleState(state.id));
+                usSvg.appendChild(pathElement);
+            });
+            syncAllUIVisuals();
+        }
+
+        function toggleState(stateId) {
+            const activePlayer = getActivePlayer();
+            const index = activePlayer.spotted.indexOf(stateId);
+
+            if (index > -1) {
+                activePlayer.spotted.splice(index, 1);
+            } else {
+                activePlayer.spotted.push(stateId);
+            }
+
+            saveGlobalData();
+            renderPlayerTray();
+            syncAllUIVisuals();
+        }
+
+        function handleAddPlayerPrompt() {
+            const name = prompt("Enter passenger's name:");
+            if(name && name.trim().length > 0) {
+                const newId = createNewPlayer(name.trim().substring(0, 12));
+                activePlayerId = newId;
+                saveGlobalData();
+                renderPlayerTray();
+                syncAllUIVisuals();
+            }
+        }
+
+        function handleActiveReset() {
+            const activePlayer = getActivePlayer();
+            if (confirm(`Reset all tracking progress data for ${activePlayer.name}?`)) {
+                activePlayer.spotted = [];
+                saveGlobalData();
+                renderPlayerTray();
+                syncAllUIVisuals();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
